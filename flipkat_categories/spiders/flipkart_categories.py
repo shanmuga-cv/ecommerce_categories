@@ -30,7 +30,8 @@ class FlipkartCategories(scrapy.Spider):
         heirarchy = [(ct['title'], ct['uri']) for ct in category_tree]
         for x in category_tree[-1]['child']:
             record = CategoriesItem()
-            record['category_tree'] = heirarchy + [(x['title'], ['uri'])]
+            record['category_tree'] = heirarchy + [(x['title'], x['uri'])]
             record['url'] = x['uri']
             record['website'] = self.website
             yield record
+            yield scrapy.Request(response.urljoin(x['uri']), callback=self.parse_filters_from_listing_page)
