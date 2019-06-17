@@ -8,8 +8,9 @@
 import scrapy
 
 
-class FlipkatCategoriesItem(scrapy.Item):
+class CategoriesItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     category_tree = scrapy.Field()
     url = scrapy.Field()
+    website = scrapy.Field()
