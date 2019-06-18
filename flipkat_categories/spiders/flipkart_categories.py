@@ -27,10 +27,10 @@ class FlipkartCategories(scrapy.Spider):
         # remove 'window.__INITIAL_STATE__ = ' from beginning and ';' from ending
         json_data = json.loads(js_script_data.strip()[27:-1])
         category_tree = json_data['pageDataV4']['browseMetadata']['storeMetaInfo']
-        heirarchy = [(ct['title'], ct['uri']) for ct in category_tree]
+        heirarchy = [ct['title'] for ct in category_tree]
         for x in category_tree[-1]['child']:
             record = CategoriesItem()
-            record['category_tree'] = heirarchy + [(x['title'], x['uri'])]
+            record['category_tree'] = heirarchy + [x['title']]
             record['url'] = x['uri']
             record['website'] = self.website
             yield record
