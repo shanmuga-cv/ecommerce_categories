@@ -43,6 +43,8 @@ class AmazonCategorySpider(scrapy.Spider):
         left_nav = response.xpath("//div[@id='leftNav']/h3[text()='Show results for']/following-sibling::ul[1]" )
         category_hierarchy = [ch.strip() for ch in left_nav.xpath("./li/span//text()").extract()]
         if not category_hierarchy:
+            self.logger.info("category_hierarchy is empty skipping "+response.url)
+            self.crawler.stats.inc_value("skipped/empty_category_hierarchy")
             return None
         record = CategoriesItem()
         record['category_tree'] = category_hierarchy
