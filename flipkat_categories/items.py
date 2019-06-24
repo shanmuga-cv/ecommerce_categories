@@ -15,6 +15,8 @@ class CategoriesItem(scrapy.Item):
     url = scrapy.Field()
     website = scrapy.Field()
 
+    # Intentionally removed non-parameterized constructor to support validation.
+    # This will cause problems if ItemLoader is used.
     def __init__(self, category_tree, url, website):
         if not url.startswith("http"):
             raise ValueError(f"bad url {url}")
