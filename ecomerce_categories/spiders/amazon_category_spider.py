@@ -1,5 +1,5 @@
 import scrapy
-from ..items import CategoriesItem
+from ecomerce_categories.items import CategoriesItem
 
 
 class AmazonCategorySpider(scrapy.Spider):

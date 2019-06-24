@@ -1,6 +1,6 @@
 import json
 import scrapy
-from ..items import CategoriesItem
+from ecomerce_categories.items import CategoriesItem
 
 
 class FlipkartCategories(scrapy.Spider):
