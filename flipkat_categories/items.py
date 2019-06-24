@@ -14,3 +14,10 @@ class CategoriesItem(scrapy.Item):
     category_tree = scrapy.Field()
     url = scrapy.Field()
     website = scrapy.Field()
+
+    def __init__(self, category_tree, url, website):
+        if not url.startswith("http"):
+            raise ValueError(f"bad url {url}")
+        if not category_tree:
+            raise ValueError(f"empty category_tree")
+        scrapy.Item.__init__(self, category_tree=category_tree, url=url, website=website)

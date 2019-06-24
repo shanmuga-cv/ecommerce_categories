@@ -46,9 +46,7 @@ class AmazonCategorySpider(scrapy.Spider):
             self.logger.info("category_hierarchy is empty skipping "+response.url)
             self.crawler.stats.inc_value("skipped/empty_category_hierarchy")
             return None
-        record = CategoriesItem()
-        record['category_tree'] = category_hierarchy
-        record['url'] = response.url
-        record['website'] = self.website
-        yield record
+        category_tree = category_hierarchy
+        url = response.url
+        yield CategoriesItem(category_tree, url, self.website)
         yield from [scrapy.Request(url) for url in left_nav.xpath("./ul[1]/div/li/span/a/@href").extract()]
