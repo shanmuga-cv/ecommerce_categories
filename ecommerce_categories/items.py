@@ -23,3 +23,10 @@ class CategoriesItem(scrapy.Item):
         if not category_tree:
             raise ValueError(f"empty category_tree")
         scrapy.Item.__init__(self, category_tree=category_tree, url=url, website=website)
+
+
+class ListingItem(scrapy.Item):
+    category_tree = scrapy.Field()
+    response_body = scrapy.Field()
+    url = scrapy.Field()
+    file_name = scrapy.Field()
